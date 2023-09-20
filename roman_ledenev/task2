@@ -1,0 +1,15 @@
+db.users.aggregate([
+{
+  $lookup: {
+      from: "tracks",
+      localField: "_id",
+      foreignField: "author_id",
+      as: "tracks"
+  }
+},
+{$project: {
+    _id: 0,
+    author_name: "$fullname",
+    count_tracks: {$size: "$tracks"}
+}}
+]);
