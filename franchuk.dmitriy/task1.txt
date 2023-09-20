@@ -1,0 +1,22 @@
+db.tracks.aggregate([
+  {
+    $group: {
+      _id: "$author_id",
+      ко_во_треков: { $sum: 1 },
+      titles: { $push: "$title" }
+    }
+  },
+  {
+    $project: {
+      author_id: "$_id",
+      ко_во_треков: 1,
+      titles: 1,
+      _id: 0
+    }
+  }
+])
+
+
+
+
+
